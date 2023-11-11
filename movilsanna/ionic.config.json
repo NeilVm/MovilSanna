@@ -1,0 +1,7 @@
+{
+  "name": "movilsanna",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
