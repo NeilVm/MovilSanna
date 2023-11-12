@@ -3,6 +3,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AlertController } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { Storage } from '@ionic/storage';
+
 
 @Component({
   selector: 'app-login',
@@ -16,6 +18,7 @@ export class LoginPage implements OnInit {
     private fb: FormBuilder,
     private alertController: AlertController,
     private http: HttpClient,
+    private storage: Storage,
     private router: Router
   ) {
     this.formularioLogin = this.fb.group({
@@ -24,7 +27,9 @@ export class LoginPage implements OnInit {
     });
   }
 
-  ngOnInit() {}
+  async ngOnInit() {
+    this.storage = await this.storage.create();
+  }
 
   async ingresar() {
     try {
@@ -40,18 +45,28 @@ export class LoginPage implements OnInit {
 
       const formData = this.formularioLogin.value;
 
-      const response = await this.http
+      const responseText = await this.http
         .post(
           'https://ggwv2su9f5.execute-api.us-west-1.amazonaws.com/Prod/Sanna/login',
           formData,
-          { responseType: 'text' } // Indica que la respuesta es de tipo texto
+          { responseType: 'text' }
         )
         .toPromise();
 
-      if (response === 'Inicio de sesión exitoso') {
-        this.router.navigate(['/inicio']);
+      if (responseText === 'Inicio de sesión exitoso') {
+        const formData = this.formularioLogin.value;
+        console.log('Datos a almacenar:', formData);
+        this.storage.set('credentials', formData);
+
+        this.router.navigate(['/inicio'], {
+          state: {
+            credentials: formData
+          }
+        });
+        console.log('Datos almacenados:', formData);
         console.log('Ingresado');
       } else {
+        
         const alert = await this.alertController.create({
           header: 'Error de autenticación',
           message: 'Credenciales incorrectas u otro error.',
@@ -64,7 +79,7 @@ export class LoginPage implements OnInit {
 
       const alert = await this.alertController.create({
         header: 'Error al ingresar',
-        message: 'Ha ocurrido un error al intentar ingresar.',
+        message: 'Ha ocurrido un error al intentar ingresar. Por favor, intenta nuevamente más tarde.',
         buttons: ['Aceptar'],
       });
       await alert.present();

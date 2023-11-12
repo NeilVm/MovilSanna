@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registrop',
@@ -10,7 +11,7 @@ import { HttpClient } from '@angular/common/http';
 export class RegistropPage {
   signupForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private http: HttpClient) {
+  constructor(private formBuilder: FormBuilder, private http: HttpClient, private router: Router) {
     this.signupForm = this.formBuilder.group({
       typeDocumentId: ['', Validators.required],
       documentNumber: ['', Validators.required],
@@ -29,7 +30,7 @@ export class RegistropPage {
 
   SignUp() {
     console.log('Botón presionado');
-  
+
     if (this.signupForm.valid) {
       const formData = {
         userModel: {
@@ -54,32 +55,45 @@ export class RegistropPage {
           insurancePlanId: this.signupForm.value.insurancePlanId,
           insurancePlan: {
             id: this.signupForm.value.insurancePlanId,
-            name: 'BCRP'  
+            name: 'BCRP'
           },
           email: this.signupForm.value.email,
           comment: this.signupForm.value.comment,
           userId: 0,
           user: {
             id: 0,
-            username: this.signupForm.value.documentNumber,  
-            password: this.signupForm.value.password  
+            username: this.signupForm.value.documentNumber,
+            password: this.signupForm.value.password
           }
         }
       };
-  
+
       console.log('Formulario válido:', this.signupForm.valid);
-  
-      this.http.post('https://ggwv2su9f5.execute-api.us-west-1.amazonaws.com/Prod/Sanna/registro', formData)
+
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Accept': 'text/plain'
+        }),
+        responseType: 'text' as 'json'  
+      };
+
+      this.http.post('https://ggwv2su9f5.execute-api.us-west-1.amazonaws.com/Prod/Sanna/registro', formData, httpOptions)
         .subscribe(
-          (response) => {
-            // Maneja la respuesta de la API aquí
-            console.log('Registro exitoso', response);
+          (response: any) => {
+            if (response === 'Registro Exitoso') {
+              this.router.navigate(['/inicio']);
+              console.log('Registro exitoso', response);
+            } else {
+              console.log('Error en el registro', response);
+              this.router.navigate(['/inicio']);
+            }
           },
           (error) => {
-            // Maneja los errores de la API aquí
+           
             console.error('Error en el registro', error);
           }
         );
     }
   }
-}  
+}

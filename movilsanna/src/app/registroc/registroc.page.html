@@ -1,0 +1,90 @@
+<ion-content>
+    <br>
+    <ion-img src="./assets/img/logo.jpg"></ion-img>
+    <br><br>
+    <div class="centrado">
+      </div>
+    <br><br>
+
+    <form [formGroup]="formularioc" (ngSubmit)="registrarc()">
+        <ion-item>
+          <ion-label position="floating">Hora de Cita</ion-label>
+          <ion-datetime presentation="time" displayFormat="HH:mm" formControlName="agreedTime" required ></ion-datetime>
+         </ion-item>
+      
+      <ion-item>
+        <ion-label>Doctor </ion-label>
+        <ion-select formControlName="doctor" required>
+          <ion-select-option value="1">Juan Rodas Guszman</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <br>
+      <h4><b>Datos Paciente</b></h4>
+
+      <ion-item>
+        <ion-label position="floating">Nombre:</ion-label>
+        <ion-input type="text" formControlName="namep"></ion-input>
+      </ion-item>
+  
+      <ion-item>
+        <ion-label position="floating">Apellido Paterno:</ion-label>
+        <ion-input type="text" formControlName="lastnamep" required></ion-input>
+      </ion-item>
+  
+      <ion-item>
+        <ion-label position="floating">Apellido Materno:</ion-label>
+        <ion-input type="text" formControlName="middleNamep" required></ion-input>
+      </ion-item>
+  
+      <ion-item>
+        <ion-label>Sexo:</ion-label>
+        <ion-select formControlName="genderp" required>
+          <ion-select-option value="M">Masculino</ion-select-option>
+          <ion-select-option value="F">Femenino</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+        <ion-item>
+        <ion-label position="floating">Número de Documento:</ion-label>
+        <ion-input type="text" formControlName="documentNumberp" required></ion-input>
+        </ion-item>
+
+        <ion-item>
+        <ion-label position="floating">Email:</ion-label>
+        <ion-input type="email" formControlName="email" required></ion-input>
+        </ion-item>
+
+         <ion-item>
+        <ion-label position="floating">Celular:</ion-label>
+        <ion-input type="text" formControlName="phoneNumberp" required></ion-input>
+        </ion-item>
+
+        <ion-item>
+        <ion-label>Especialidad</ion-label>
+        <ion-select formControlName="especialidad" required>
+        <ion-select-option value="1">Cardiologia</ion-select-option>
+        </ion-select>
+        </ion-item>
+
+        <ion-item>
+        <ion-label>Centro Medico</ion-label>
+        <ion-select formControlName="centroMe" required>
+        <ion-select-option value="1">SANNA Clínica EL GOLF</ion-select-option>
+        </ion-select>
+        </ion-item>
+        <br>
+        <h4><b>Validacion de Credenciales</b></h4>
+
+      <ion-item>
+      <ion-label position="floating">Contraseña:</ion-label>
+      <ion-input type="password" formControlName="password" required></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label position="floating">Fecha y Hora del registro de cita:</ion-label>
+            <ion-datetime displayFormat="YYYY-MM-DDTHH:mm:ss.SSSZ" formControlName="agreedDate" readonly></ion-datetime>
+          </ion-item>
+
+    <ion-button type="submit" color="success" expand="full" shape="round">Registrar Cita</ion-button>
+  </form>
+</ion-content>
