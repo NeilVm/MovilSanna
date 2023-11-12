@@ -3,15 +3,17 @@
     <ion-img src="./assets/img/logo.jpg"></ion-img>
     <br><br>
     <div class="centrado">
+     <h5><b>REGISTRAR CITAS</b></h5>
       </div>
-    <br><br>
+    <br>
 
     <form [formGroup]="formularioc" (ngSubmit)="registrarc()">
         <ion-item>
           <ion-label position="floating">Hora de Cita</ion-label>
+          <br>
           <ion-datetime presentation="time" displayFormat="HH:mm" formControlName="agreedTime" required ></ion-datetime>
          </ion-item>
-      
+      <br>
       <ion-item>
         <ion-label>Doctor </ion-label>
         <ion-select formControlName="doctor" required>
