@@ -1,0 +1,99 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-img src="./assets/img/logo.jpg"></ion-img>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="signupForm" (ngSubmit)="SignUp()">
+    <ion-item>
+      <ion-label>Tipo de documento:</ion-label>
+      <ion-select formControlName="typeDocumentId" required>
+        <ion-select-option value="1">DNI</ion-select-option>
+        <ion-select-option value="2">CE</ion-select-option>
+        <ion-select-option value="3">PASAPORTE</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Número de Documento:</ion-label>
+      <ion-input type="text" formControlName="documentNumber" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Nombre:</ion-label>
+      <ion-input type="text" formControlName="name"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Apellido Paterno:</ion-label>
+      <ion-input type="text" formControlName="lastname" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Apellido Materno:</ion-label>
+      <ion-input type="text" formControlName="middleName" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Sexo:</ion-label>
+      <ion-select formControlName="gender" required>
+        <ion-select-option value="M">Masculino</ion-select-option>
+        <ion-select-option value="F">Femenino</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Fecha de Nacimiento:</ion-label>
+      <ion-datetime displayFormat="YYYY-MM-DDTHH:mm:ss.SSSZ" formControlName="dateOfBirth" required></ion-datetime>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Seguro Plan de Salud:</ion-label>
+      <ion-select formControlName="insurancePlanId" required>
+        <ion-select-option value="1">BCRP</ion-select-option>
+        <ion-select-option value="2">FEBAN</ion-select-option>
+        <ion-select-option value="3">FOSPEME</ion-select-option>
+        <ion-select-option value="4">La Positiva EPS</ion-select-option>
+        <ion-select-option value="5">La Positiva Seguros</ion-select-option>
+        <ion-select-option value="6">Mapfre EPS</ion-select-option>
+        <ion-select-option value="7">Mapfre Seguros</ion-select-option>
+        <ion-select-option value="8">Otros</ion-select-option>
+        <ion-select-option value="9">Pacifico EPS</ion-select-option>
+        <ion-select-option value="10">Pacifico Seguros</ion-select-option>
+        <ion-select-option value="11">PAMF PETROPERU</ion-select-option>
+        <ion-select-option value="12">Particular</ion-select-option>
+        <ion-select-option value="13">Plan de Salud Familiar</ion-select-option>
+        <ion-select-option value="14">Prepaga ONCOSALUD</ion-select-option>
+        <ion-select-option value="15">Prepagada Clínica EL GOLF</ion-select-option>
+        <ion-select-option value="16">Rimac Seguros y EPS</ion-select-option>
+        <ion-select-option value="17">Sanitas Peru EPS</ion-select-option>
+        <ion-select-option value="18">SEMEFA</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Email:</ion-label>
+      <ion-input type="email" formControlName="email" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Celular:</ion-label>
+      <ion-input type="text" formControlName="phoneNumber" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Comentario:</ion-label>
+      <ion-input type="text" formControlName="comment" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Contraseña:</ion-label>
+      <ion-input type="password" formControlName="password" required></ion-input>
+    </ion-item>
+
+    <ion-button type="submit" color="success" expand="full" shape="round">Registrar</ion-button>
+  </form>
+
+  <p>¿Ya tienes cuenta? Inicia sesión <a [routerLink]="'/login'">aquí</a></p>
+</ion-content>

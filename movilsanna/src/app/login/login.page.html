@@ -1,0 +1,31 @@
+<ion-content>
+  <br>
+  <ion-img src="./assets/img/logo.jpg"></ion-img>
+  <br><br><br><br>
+  <div class="centrado">
+    </div>
+  <br><br>
+  <ion-content>
+    <form [formGroup]="formularioLogin" (ngSubmit)="ingresar()">
+      <ion-item>
+        <ion-label position="floating">N° Documento</ion-label>
+        <ion-input
+          type="text"
+          formControlName="username"
+          required
+        ></ion-input>
+      </ion-item>
+      <br><br><br>
+      <ion-item>
+        <ion-label position="floating">Contraseña</ion-label>
+        <ion-input
+          type="password"
+          formControlName="password"
+          required
+        ></ion-input>
+      </ion-item>
+      <br><br><br>
+      <ion-button expand="full" type="submit" color="success" shape="round">Iniciar Sesión</ion-button>
+    </form>
+  </ion-content>
+
