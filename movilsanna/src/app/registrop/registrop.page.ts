@@ -82,11 +82,11 @@ export class RegistropPage {
         .subscribe(
           (response: any) => {
             if (response === 'Registro Exitoso') {
-              this.router.navigate(['/inicio']);
+              this.router.navigate(['/login']);
               console.log('Registro exitoso', response);
             } else {
               console.log('Error en el registro', response);
-              this.router.navigate(['/inicio']);
+              this.router.navigate(['/login']);
             }
           },
           (error) => {
